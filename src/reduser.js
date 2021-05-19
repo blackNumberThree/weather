@@ -1,5 +1,6 @@
 const startState = {
-  sity: "",
+  city: "",
+  coord: { latitude: 0, longitude: 0 },
   timeMode: "",
   weatherMap: {
     dt: 0,
@@ -11,15 +12,18 @@ const startState = {
     humidity: 0,
     wind: 0,
     windGust: 0,
-    coord: { lon: 0, lat: 0 },
   },
 };
 
 export const reducer = function (state = startState, { type, payload }) {
-  let { sity, timeMode } = state;
+  let { city, timeMode, coord, weatherMap } = state;
   switch (type) {
     case "addWeather":
-      return { sity, timeMode, weatherMap: payload };
+      return { city, coord, timeMode, weatherMap: payload };
+    case "changeCityName":
+      return { city: payload, coord, timeMode, weatherMap };
+    case "changeCoord":
+      return { city, coord: payload, timeMode, weatherMap };
     default:
       return state;
   }

@@ -5,26 +5,32 @@ import thunk from "redux-thunk";
 
 export const store = createStore(reducer, applyMiddleware(thunk));
 
-// export const add = (dispatch) => {
-//   return (payload) =>
-//     dispatch({
-//       type: "addWeather",
-//       payload: payload,
-//     });
-// };
-export const add = (props) => {
-  console.log(props);
+const changeCityName = (cityName) => {
+  return {
+    type: "changeCityName",
+    payload: cityName,
+  };
+};
+const changeCoord = (coord) => {
+  let latitude = coord[0];
+  let longitude = coord[1];
+  return {
+    type: "changeCoord",
+    payload: { latitude, longitude },
+  };
+};
+const addWeatherMap = ({ current }) => {
+  console.log(current);
   let weatherMap = {
-    coord: props.coord,
-    dt: props.dt,
-    icon: props.weather["0"].icon,
-    temp: props.main.temp,
-    feels_like: props.main.feels_like,
-    clouds: props.clouds.all,
-    pressure: props.main.pressure,
-    humidity: props.main.humidity,
-    wind: props.wind.speed,
-    windGust: props.wind.gust,
+    dt: current.dt,
+    icon: current.weather["0"].icon,
+    temp: current.temp,
+    feels_like: current.feels_like,
+    clouds: current.clouds,
+    pressure: current.pressure,
+    humidity: current.humidity,
+    wind: current.speed,
+    uvi: current.uvi,
   };
   return {
     type: "addWeather",
@@ -32,4 +38,15 @@ export const add = (props) => {
   };
 };
 
-export let dispathAdd = bindActionCreators(add, store.dispatch);
+export const dispathAddWeather = bindActionCreators(
+  addWeatherMap,
+  store.dispatch
+);
+export const dispathChangeCityName = bindActionCreators(
+  changeCityName,
+  store.dispatch
+);
+export const dispathChangeCoord = bindActionCreators(
+  changeCoord,
+  store.dispatch
+);
