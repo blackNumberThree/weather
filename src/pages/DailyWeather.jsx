@@ -1,8 +1,24 @@
 import { WitherDisplay } from "../components/WeatherDisplay";
-export function DailyWeather() {
+import { WeatherBarElement } from "../components/WeatherBarElement";
+import { connect } from "react-redux";
+
+export function CreateDailyWeather({ weatherMap, chosenTimeBar }) {
   return (
     <>
-      <WitherDisplay />
+      <div>
+        {weatherMap.map((element, index) => (
+          <WeatherBarElement key={element.dt} element={element} index={index} />
+        ))}
+      </div>
+      <WitherDisplay weatherMap={weatherMap[chosenTimeBar]} />
     </>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    weatherMap: state.weatherMap,
+    chosenTimeBar: state.chosenTimeBar,
+  };
+}
+export let DailyWeather = connect(mapStateToProps)(CreateDailyWeather);

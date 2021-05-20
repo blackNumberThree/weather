@@ -1,5 +1,8 @@
 import { connect } from "react-redux";
-import { dispathChangeCityName } from "../action-creation";
+import {
+  dispatchChangeCityName,
+  dispatchChangeCoord,
+} from "../action-creation";
 import { sendRequestToAPI } from "../APIServise";
 
 function createSirchPanel() {
@@ -7,8 +10,9 @@ function createSirchPanel() {
     const cityIndex = event.target.options.selectedIndex;
     const cityName = event.target[cityIndex].innerText;
     const coord = event.target[cityIndex].value.split(",");
-    dispathChangeCityName(cityName);
-    sendRequestToAPI(coord[0], coord[1]);
+    dispatchChangeCityName(cityName);
+    dispatchChangeCoord(coord[0], coord[1]);
+    sendRequestToAPI();
   }
   return (
     <div>

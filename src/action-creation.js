@@ -12,41 +12,62 @@ const changeCityName = (cityName) => {
   };
 };
 const changeCoord = (coord) => {
-  let latitude = coord[0];
-  let longitude = coord[1];
+  let latitude = Number(coord[0]).toFixed(2);
+  let longitude = Number(coord[1]).toFixed(2);
   return {
     type: "changeCoord",
     payload: { latitude, longitude },
   };
 };
-const addWeatherMap = ({ current }) => {
-  console.log(current);
-  let weatherMap = {
-    dt: current.dt,
-    icon: current.weather["0"].icon,
-    temp: current.temp,
-    feels_like: current.feels_like,
-    clouds: current.clouds,
-    pressure: current.pressure,
-    humidity: current.humidity,
-    wind: current.speed,
-    uvi: current.uvi,
+const changeTimeMode = (event) => {
+  const timeMode = event.target.className;
+  return {
+    type: "changeTimeMode",
+    payload: timeMode,
   };
+};
+const addWeatherMap = (prop) => {
+  let carrentWeatherData = prop?.hourly || prop?.daily || [prop?.current];
+  let weatherMap = carrentWeatherData.map((element) => {
+    return {
+      dt: element.dt,
+      icon: element.weather["0"].icon,
+      temp: element.temp?.day || element.temp,
+      feels_like: element.feels_like?.day || element.feels_like,
+      clouds: element.clouds,
+      pressure: element.pressure,
+      humidity: element.humidity,
+      windSpeed: element.wind_speed,
+      windGust: element.wind_gust,
+      uvi: element.uvi,
+    };
+  });
+
   return {
     type: "addWeather",
     payload: weatherMap,
   };
 };
+const changeChosenTimeBar = (chosenTimeBar) => {
+  return {
+    type: "changeChosenTimeBar",
+    payload: chosenTimeBar,
+  };
+};
 
-export const dispathAddWeather = bindActionCreators(
-  addWeatherMap,
-  store.dispatch
-);
-export const dispathChangeCityName = bindActionCreators(
-  changeCityName,
-  store.dispatch
-);
-export const dispathChangeCoord = bindActionCreators(
-  changeCoord,
+export const {
+  dispatchAddWeather,
+  dispatchChangeCityName,
+  dispatchChangeCoord,
+  dispatchChangeTimeMode,
+  dispatchChangeChosenTimeBar,
+} = bindActionCreators(
+  {
+    dispatchAddWeather: addWeatherMap,
+    dispatchChangeCityName: changeCityName,
+    dispatchChangeCoord: changeCoord,
+    dispatchChangeTimeMode: changeTimeMode,
+    dispatchChangeChosenTimeBar: changeChosenTimeBar,
+  },
   store.dispatch
 );
