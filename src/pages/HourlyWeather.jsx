@@ -18,11 +18,11 @@ export function CreateHourlyWeather({ weatherMap, chosenTimeBar }) {
   }
   return (
     <>
-      <div onClick={setTodayWeather}>
-        <h3>Погода на сегодня</h3>
+      <div>
+        <h3 onClick={setTodayWeather}>Погода на сегодня</h3>
       </div>
-      <div onClick={setTomorrowWeather}>
-        <h3>Погода на завтра</h3>
+      <div>
+        <h3 onClick={setTomorrowWeather}>Погода на завтра</h3>
       </div>
       <div>
         {currentWeatherDay.map((element, index) => (
@@ -36,7 +36,7 @@ export function CreateHourlyWeather({ weatherMap, chosenTimeBar }) {
 
 function mapStateToProps(state) {
   return {
-    weatherMap: state.weatherMap,
+    weatherMap: state.weatherMap.hourlyWeather,
     chosenTimeBar: state.chosenTimeBar,
   };
 }

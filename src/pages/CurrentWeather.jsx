@@ -1,9 +1,15 @@
 import { WitherDisplay } from "../components/WeatherDisplay";
-
-export function CurrentWeather() {
+import { connect } from "react-redux";
+function createCurrentWeather({ weatherMap }) {
   return (
     <>
-      <WitherDisplay />
+      <WitherDisplay weatherMap={weatherMap} />
     </>
   );
 }
+function mapStateToProps(state) {
+  return {
+    weatherMap: state.weatherMap.currentWeather,
+  };
+}
+export let CurrentWeather = connect(mapStateToProps)(createCurrentWeather);

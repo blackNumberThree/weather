@@ -17,7 +17,7 @@ export function CreateDailyWeather({ weatherMap, chosenTimeBar }) {
 
 function mapStateToProps(state) {
   return {
-    weatherMap: state.weatherMap,
+    weatherMap: state.weatherMap.dailyWeather,
     chosenTimeBar: state.chosenTimeBar,
   };
 }

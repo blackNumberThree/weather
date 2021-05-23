@@ -1,27 +1,14 @@
-import { dispatchChangeTimeMode } from "../action-creation";
-
+import { Link } from "react-router-dom";
 export function TimeNavigation() {
   return (
     <div>
       <span>Прогноз на :</span>
-      <button
-        className="minutely,hourly,daily"
-        onClick={dispatchChangeTimeMode}
-      >
-        сейчас
-      </button>
-      <button
-        className="minutely,current,daily"
-        onClick={dispatchChangeTimeMode}
-      >
-        на два дня
-      </button>
-      <button
-        className="minutely,hourly,current"
-        onClick={dispatchChangeTimeMode}
-      >
-        на семь дней
-      </button>
+      <br />
+      <Link to="/current">сейчас</Link>
+      <br />
+      <Link to="/hourly">на два дня</Link>
+      <br />
+      <Link to="daily">на семь дней</Link>
     </div>
   );
 }

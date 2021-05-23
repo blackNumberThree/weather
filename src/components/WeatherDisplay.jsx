@@ -1,5 +1,3 @@
-// import { connect } from "react-redux";
-
 export function WitherDisplay({ weatherMap }) {
   return (
     <ol>
@@ -12,10 +10,7 @@ export function WitherDisplay({ weatherMap }) {
       <li>ветер {weatherMap.windSpeed}</li>
       <li>порывы ветра {weatherMap.windGust}</li>
       <li>Ультрафиолет {weatherMap.uvi}</li>
+      <li>Описание {weatherMap.description}</li>
     </ol>
   );
 }
-// function mapStateToProps(state) {
-//   return { weatherMap: state.weatherMap[0] };
-// }
-// export let WitherDisplay = connect(mapStateToProps)(createWitherDisplay);

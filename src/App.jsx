@@ -1,19 +1,45 @@
-import { DailyWeather } from "../src/pages/DailyWeather";
-import { Provider } from "react-redux";
-import { store } from "./action-creation";
-import { getWeatherAPI } from "./APIServise";
+import { getGeodata } from "./APIServise";
 import { Header } from "../src/components/Header";
 import { SirchPanel } from "./components/SirchPanel";
 import { TimeNavigation } from "./components/TimeNavigation";
+import { HourlyWeather } from "./pages/HourlyWeather";
+import { CurrentWeather } from "./pages/CurrentWeather";
+import { DailyWeather } from "./pages/DailyWeather";
+import { Route } from "react-router-dom";
+import { connect } from "react-redux";
+import { sendRequestToAPI } from "./APIServise";
 import { useEffect } from "react";
-export function App() {
-  useEffect(getWeatherAPI, []);
+import { store } from "./action-creation";
+
+export function CreateApp() {
+  useEffect(() => {
+    getGeodata();
+    sendRequestToAPI();
+  }, []);
+
+  if (!store.getState().weatherMap) {
+    return <h1>Hello</h1>;
+  }
   return (
-    <Provider store={store}>
+    <>
       <Header />
       <TimeNavigation />
       <SirchPanel />
-      <DailyWeather />
-    </Provider>
+      <Route path="/current" component={CurrentWeather} />
+      <Route path="/hourly" component={HourlyWeather} />
+      <Route path="/daily" component={DailyWeather} />
+    </>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    weatherMap: state.weatherMap,
+  };
+}
+export let App = connect(mapStateToProps)(CreateApp);
+// if (!coord.latitude) {
+//   getGeodata();
+//   sendRequestToAPI();
+//   return <h1>Hello</h1>;
+// }

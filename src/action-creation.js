@@ -19,30 +19,13 @@ const changeCoord = (coord) => {
     payload: { latitude, longitude },
   };
 };
-const changeTimeMode = (event) => {
-  const timeMode = event.target.className;
+const changeTimeMode = (timeMode) => {
   return {
     type: "changeTimeMode",
     payload: timeMode,
   };
 };
-const addWeatherMap = (prop) => {
-  let carrentWeatherData = prop?.hourly || prop?.daily || [prop?.current];
-  let weatherMap = carrentWeatherData.map((element) => {
-    return {
-      dt: element.dt,
-      icon: element.weather["0"].icon,
-      temp: element.temp?.day || element.temp,
-      feels_like: element.feels_like?.day || element.feels_like,
-      clouds: element.clouds,
-      pressure: element.pressure,
-      humidity: element.humidity,
-      windSpeed: element.wind_speed,
-      windGust: element.wind_gust,
-      uvi: element.uvi,
-    };
-  });
-
+const addWeatherMap = (weatherMap) => {
   return {
     type: "addWeather",
     payload: weatherMap,
