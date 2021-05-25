@@ -12,8 +12,8 @@ const changeCityName = (cityName) => {
   };
 };
 const changeCoord = (coord) => {
-  let latitude = Number(coord[0]).toFixed(2);
-  let longitude = Number(coord[1]).toFixed(2);
+  let latitude = coord[0];
+  let longitude = coord[1];
   return {
     type: "changeCoord",
     payload: { latitude, longitude },

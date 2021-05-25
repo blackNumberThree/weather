@@ -4,17 +4,25 @@ import { connect } from "react-redux";
 import { useState } from "react";
 
 export function CreateHourlyWeather({ weatherMap, chosenTimeBar }) {
-  let todayWeather = [...weatherMap];
-  todayWeather.splice(24, 24);
-  let tomorrowWeather = [...weatherMap];
-  tomorrowWeather.splice(0, 24);
-  let [currentWeatherDay, setCurrentWeather] = useState(todayWeather);
+  let todayWeather, tomorrowWeather;
+
+  if (weatherMap) {
+    todayWeather = [...weatherMap];
+    todayWeather.splice(24, 24);
+    tomorrowWeather = [...weatherMap];
+    tomorrowWeather.splice(0, 24);
+  }
+  let [currentWeatherDay, setCurrentWeather] = useState(weatherMap);
+
   function setTodayWeather() {
     setCurrentWeather(todayWeather);
   }
-
   function setTomorrowWeather() {
     setCurrentWeather(tomorrowWeather);
+  }
+
+  if (!weatherMap) {
+    return <h1>Hello</h1>;
   }
   return (
     <>
@@ -29,7 +37,7 @@ export function CreateHourlyWeather({ weatherMap, chosenTimeBar }) {
           <WeatherBarElement key={element.dt} element={element} index={index} />
         ))}
       </div>
-      <WitherDisplay weatherMap={weatherMap[chosenTimeBar]} />
+      {<WitherDisplay weatherMap={weatherMap[chosenTimeBar]} />}
     </>
   );
 }

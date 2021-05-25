@@ -1,29 +1,36 @@
 import {
   dispatchAddWeather,
   dispatchChangeCoord,
+  dispatchChangeTimeMode,
   store,
 } from "./action-creation";
 
-export async function sendRequestToAPI() {
-  let currentCoord = store.getState().coord;
-  const urlAddress = `https://api.openweathermap.org/data/2.5/onecall?lat=${currentCoord.latitude}&lon=${currentCoord.longitude}&exclude=minutely,allert&appid=9c1ff6247b1e536d7d7e76b09597a61b&units=metric&lang=ru`;
+export async function sendRequestToAPI(latitude, longitude) {
+  dispatchAddWeather(false);
+  const urlAddress = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,allert&appid=9c1ff6247b1e536d7d7e76b09597a61b&units=metric&lang=ru`;
+
   const response = await fetch(urlAddress);
   if (!response.ok) {
     throw new Error("We couldn't  send fetch request");
   }
   const json = await response.json();
   dispatchAddWeather(convertWeatherMap(json));
+  return json;
 }
 
 export function getGeodata() {
-  navigator.geolocation.getCurrentPosition(success, error);
   function success(position) {
-    let { longitude, latitude } = position.coords;
-    dispatchChangeCoord([latitude, longitude]);
+    let { latitude, longitude } = position.coords;
+    sendRequestToAPI(latitude, longitude).then(() =>
+      dispatchChangeCoord([latitude.toFixed(2), longitude.toFixed(2)])
+    );
   }
   function error(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
+  const option = { enableHighAccuracy: true, timeout: 5000, maximumAge: 1000 };
+
+  navigator.geolocation.getCurrentPosition(success, error, option);
 }
 function convertWeatherMap({ current, daily, hourly }) {
   let convertedCurrent = {
@@ -75,4 +82,13 @@ function convertWeatherMap({ current, daily, hourly }) {
     hourlyWeather: convertedHourly,
     dailyWeather: convertedDaily,
   };
+}
+
+export function hundlerURLRequest({ newLatitude, newLongitude }, mode) {
+  let { latitude, longitude } = store.getState().coord;
+  if (latitude !== newLatitude || longitude !== newLongitude) {
+    dispatchChangeCoord([newLatitude, newLongitude]);
+    sendRequestToAPI(newLatitude, newLongitude);
+  }
+  dispatchChangeTimeMode(mode);
 }
