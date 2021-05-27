@@ -1,8 +1,10 @@
-import { dispatchChangeChosenTimeBar } from "../action-creation";
-
-export function WeatherBarElement({ element: { dt, icon, temp }, index }) {
+export function WeatherBarElement({
+  element: { dt, icon, temp },
+  index,
+  setChosenDay,
+}) {
   function changeChosenElement() {
-    dispatchChangeChosenTimeBar(index);
+    setChosenDay(index);
   }
   return (
     <div onClick={changeChosenElement}>

@@ -1,4 +1,4 @@
-import { getGeodata, hundlerURLRequest, sendRequestToAPI } from "./APIServise";
+import { getGeodata, sendRequestToAPI } from "./APIServise";
 import { Header } from "../src/components/Header";
 import { SirchPanel } from "./components/SirchPanel";
 import { TimeNavigation } from "./components/TimeNavigation";
@@ -18,13 +18,12 @@ export function CreateApp({ coord, location }) {
       sendRequestToAPI(newCoord[0], newCoord[0]);
     }
   });
-
   useEffect(() => {
     if (!coord.latitude) {
       getGeodata();
     }
   });
-
+  
   if (!coord.latitude) {
     return <h1>Hello</h1>;
   }
@@ -50,7 +49,3 @@ function mapStateToProps(state) {
 
 export let App = compose(withRouter, connect(mapStateToProps))(CreateApp);
 
-// hundlerURLRequest(
-//   { newLatitude: coord[0], newLongitude: coord[1] },
-//   "current"
-// );

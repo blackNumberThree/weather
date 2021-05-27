@@ -1,7 +1,6 @@
 const startState = {
   city: "",
   coord: { latitude: 0, longitude: 0 },
-  chosenTimeBar: 0,
   timeMode: "current",
   weatherMap: [
     {
@@ -28,8 +27,6 @@ export const reducer = function (state = startState, { type, payload }) {
       return { ...state, coord: payload };
     case "changeTimeMode":
       return { ...state, timeMode: payload };
-    case "changeChosenTimeBar":
-      return { ...state, chosenTimeBar: payload };
     default:
       return state;
   }

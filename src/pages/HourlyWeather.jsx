@@ -13,7 +13,7 @@ export function CreateHourlyWeather({ weatherMap, chosenTimeBar }) {
     tomorrowWeather.splice(0, 24);
   }
   let [currentWeatherDay, setCurrentWeather] = useState(weatherMap);
-
+  let [chosenDay, setChosenDay] = useState(0);
   function setTodayWeather() {
     setCurrentWeather(todayWeather);
   }
@@ -34,10 +34,15 @@ export function CreateHourlyWeather({ weatherMap, chosenTimeBar }) {
       </div>
       <div>
         {currentWeatherDay.map((element, index) => (
-          <WeatherBarElement key={element.dt} element={element} index={index} />
+          <WeatherBarElement
+            key={element.dt}
+            element={element}
+            index={index}
+            setChosenDay={setChosenDay}
+          />
         ))}
       </div>
-      {<WitherDisplay weatherMap={weatherMap[chosenTimeBar]} />}
+      {<WitherDisplay weatherMap={weatherMap[chosenDay]} />}
     </>
   );
 }

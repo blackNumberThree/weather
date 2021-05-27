@@ -1,9 +1,4 @@
-import {
-  dispatchAddWeather,
-  dispatchChangeCoord,
-  dispatchChangeTimeMode,
-  store,
-} from "./action-creation";
+import { dispatchAddWeather, dispatchChangeCoord } from "./action-creation";
 
 export async function sendRequestToAPI(latitude, longitude) {
   dispatchAddWeather(false);
@@ -82,13 +77,4 @@ function convertWeatherMap({ current, daily, hourly }) {
     hourlyWeather: convertedHourly,
     dailyWeather: convertedDaily,
   };
-}
-
-export function hundlerURLRequest({ newLatitude, newLongitude }, mode) {
-  let { latitude, longitude } = store.getState().coord;
-  if (latitude !== newLatitude || longitude !== newLongitude) {
-    dispatchChangeCoord([newLatitude, newLongitude]);
-    sendRequestToAPI(newLatitude, newLongitude);
-  }
-  dispatchChangeTimeMode(mode);
 }
