@@ -21,7 +21,7 @@ export async function sendRequestToAPI(latitude, longitude) {
 export function getGeodata() {
   function success(position) {
     let { latitude, longitude } = position.coords;
-    sendRequestToAPI(latitude, longitude).then(() =>
+    sendRequestToAPI(latitude.toFixed(2), longitude.toFixed(2)).then(() =>
       dispatchChangeCoord([latitude.toFixed(2), longitude.toFixed(2)])
     );
   }
