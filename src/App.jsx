@@ -1,21 +1,31 @@
-import { getGeodata, hundlerURLRequest } from "./APIServise";
+import { getGeodata, hundlerURLRequest, sendRequestToAPI } from "./APIServise";
 import { Header } from "../src/components/Header";
 import { SirchPanel } from "./components/SirchPanel";
 import { TimeNavigation } from "./components/TimeNavigation";
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { CurrentWeather } from "./pages/CurrentWeather";
 import { HourlyWeather } from "./pages/HourlyWeather";
 import { DailyWeather } from "./pages/DailyWeather";
 import { useEffect } from "react";
-
-export function CreateApp({ coord: { latitude, longitude } }) {
+import { compose } from "redux";
+export function CreateApp({ coord, location }) {
   useEffect(() => {
-    if (!latitude) {
+    if (location.pathname !== "/") {
+      let newCoord = location.pathname
+        .match(/\d\d.\d\d.\d\d.\d\d$/)[0]
+        .split(",");
+      sendRequestToAPI(newCoord[0], newCoord[0]);
+    }
+  });
+
+  useEffect(() => {
+    if (!coord.latitude) {
       getGeodata();
     }
   });
-  if (!latitude) {
+
+  if (!coord.latitude) {
     return <h1>Hello</h1>;
   }
 
@@ -24,40 +34,10 @@ export function CreateApp({ coord: { latitude, longitude } }) {
       <Header />
       <TimeNavigation />
       <SirchPanel />
-      <Route path="/" exact render={() => <CurrentWeather />} />
-      <Route
-        path="/current/:coord"
-        render={({ match }) => {
-          let coord = match.params.coord.split(",");
-          hundlerURLRequest(
-            { newLatitude: coord[0], newLongitude: coord[1] },
-            "current"
-          );
-          return <CurrentWeather />;
-        }}
-      />
-      <Route
-        path="/hourly/:coord"
-        render={({ match }) => {
-          let coord = match.params.coord.split(",");
-          hundlerURLRequest(
-            { newLatitude: coord[0], newLongitude: coord[1] },
-            "hourly"
-          );
-          return <HourlyWeather />;
-        }}
-      />
-      <Route
-        path="/daily/:coord"
-        render={({ match }) => {
-          let coord = match.params.coord.split(",");
-          hundlerURLRequest(
-            { newLatitude: coord[0], newLongitude: coord[1] },
-            "daily"
-          );
-          return <DailyWeather />;
-        }}
-      />
+      <Route path="/" exact component={CurrentWeather} />
+      <Route path="/current" component={CurrentWeather} />
+      <Route path="/hourly" component={HourlyWeather} />
+      <Route path="/daily" component={DailyWeather} />
     </>
   );
 }
@@ -67,4 +47,10 @@ function mapStateToProps(state) {
     coord: state.coord,
   };
 }
-export let App = connect(mapStateToProps)(CreateApp);
+
+export let App = compose(withRouter, connect(mapStateToProps))(CreateApp);
+
+// hundlerURLRequest(
+//   { newLatitude: coord[0], newLongitude: coord[1] },
+//   "current"
+// );
