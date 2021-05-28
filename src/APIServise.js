@@ -3,7 +3,6 @@ import { dispatchAddWeather, dispatchChangeCoord } from "./action-creation";
 export async function sendRequestToAPI(latitude, longitude) {
   dispatchAddWeather(false);
   const urlAddress = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,allert&appid=9c1ff6247b1e536d7d7e76b09597a61b&units=metric&lang=ru`;
-
   const response = await fetch(urlAddress);
   if (!response.ok) {
     throw new Error("We couldn't  send fetch request");
@@ -13,7 +12,7 @@ export async function sendRequestToAPI(latitude, longitude) {
   return json;
 }
 
-export function getGeodata() {
+export function getGeoData() {
   function success(position) {
     let { latitude, longitude } = position.coords;
     latitude = latitude.toFixed(2);
@@ -22,7 +21,6 @@ export function getGeodata() {
       dispatchChangeCoord([latitude, longitude])
     );
   }
-
   function error(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
     let latitude = 49.96;
@@ -36,6 +34,7 @@ export function getGeodata() {
 
   navigator.geolocation.getCurrentPosition(success, error, option);
 }
+
 function convertWeatherMap({ current, daily, hourly }) {
   let convertedCurrent = {
     dt: current.dt,

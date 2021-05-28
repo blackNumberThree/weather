@@ -1,9 +1,8 @@
 import { bindActionCreators } from "redux";
-import { createStore, applyMiddleware } from "redux";
+import { createStore } from "redux";
 import { reducer } from "./reduser";
-import thunk from "redux-thunk";
 
-export const store = createStore(reducer, applyMiddleware(thunk));
+export const store = createStore(reducer);
 
 const changeCityName = (cityName) => {
   return {
@@ -31,26 +30,18 @@ const addWeatherMap = (weatherMap) => {
     payload: weatherMap,
   };
 };
-const changeChosenTimeBar = (chosenTimeBar) => {
-  return {
-    type: "changeChosenTimeBar",
-    payload: chosenTimeBar,
-  };
-};
 
 export const {
   dispatchAddWeather,
   dispatchChangeCityName,
   dispatchChangeCoord,
   dispatchChangeTimeMode,
-  dispatchChangeChosenTimeBar,
 } = bindActionCreators(
   {
     dispatchAddWeather: addWeatherMap,
     dispatchChangeCityName: changeCityName,
     dispatchChangeCoord: changeCoord,
     dispatchChangeTimeMode: changeTimeMode,
-    dispatchChangeChosenTimeBar: changeChosenTimeBar,
   },
   store.dispatch
 );

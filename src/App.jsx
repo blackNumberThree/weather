@@ -1,4 +1,4 @@
-import { getGeodata, sendRequestToAPI } from "./APIServise";
+import { getGeoData, sendRequestToAPI } from "./APIServise";
 import { Header } from "../src/components/Header";
 import { SirchPanel } from "./components/SirchPanel";
 import { TimeNavigation } from "./components/TimeNavigation";
@@ -20,10 +20,10 @@ export function CreateApp({ coord, location }) {
   });
   useEffect(() => {
     if (!coord.latitude) {
-      getGeodata();
+      getGeoData();
     }
   });
-  
+
   if (!coord.latitude) {
     return <h1>Hello</h1>;
   }
@@ -48,4 +48,3 @@ function mapStateToProps(state) {
 }
 
 export let App = compose(withRouter, connect(mapStateToProps))(CreateApp);
-
