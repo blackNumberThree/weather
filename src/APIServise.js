@@ -16,12 +16,21 @@ export async function sendRequestToAPI(latitude, longitude) {
 export function getGeodata() {
   function success(position) {
     let { latitude, longitude } = position.coords;
-    sendRequestToAPI(latitude.toFixed(2), longitude.toFixed(2)).then(() =>
-      dispatchChangeCoord([latitude.toFixed(2), longitude.toFixed(2)])
+    latitude = latitude.toFixed(2);
+    longitude = longitude.toFixed(2);
+    sendRequestToAPI(latitude, longitude).then(() =>
+      dispatchChangeCoord([latitude, longitude])
     );
   }
+
   function error(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
+    let latitude = 49.96;
+    let longitude = 36.32;
+    sendRequestToAPI(latitude, longitude).then(() =>
+      dispatchChangeCoord([latitude, longitude])
+    );
+    alert("It is impossible to get your geodata");
   }
   const option = { enableHighAccuracy: true, timeout: 5000, maximumAge: 1000 };
 
