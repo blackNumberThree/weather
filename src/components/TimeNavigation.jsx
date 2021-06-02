@@ -3,14 +3,11 @@ import { connect } from "react-redux";
 
 export function CreateTimeNavigation({ coord: { latitude, longitude } }) {
   return (
-    <div>
+    <div className="TimeNavigation">
       <span>Прогноз на :</span>
-      <br />
-      <Link to={`/current/${latitude},${longitude}`}>сейчас</Link>
-      <br />
-      <Link to={`/hourly/${latitude},${longitude}`}>на два дня</Link>
-      <br />
-      <Link to={`/daily/${latitude},${longitude}`}>на семь дней</Link>
+      <Link to={`/current/${latitude},${longitude}`}> сейчас </Link>
+      <Link to={`/hourly/${latitude},${longitude}`}> на два дня </Link>
+      <Link to={`/daily/${latitude},${longitude}`}> на семь дней </Link>
     </div>
   );
 }

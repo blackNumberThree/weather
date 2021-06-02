@@ -1,0 +1,17 @@
+@font-face {
+  font-family: Roboto;
+  src: url("./font/Roboto-Regular.ttf");
+}
+.todayHourMinutes {
+  font-size: 28px;
+  font-family: Roboto;
+  margin-right: 20px;
+}
+
+.time {
+  margin: 1% 0 0 0;
+}
+.coord {
+  font-family: Roboto;
+  margin: 1% 0 2% 0;
+}
