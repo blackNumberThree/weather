@@ -1,0 +1,18 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/src/img/487.jpg");
+  background-size: 50%;
+  margin: 0;
+}
+#root {
+  box-sizing: border-box;
+  border: 1px solid rgb(139, 139, 139);
+  height: 100vh;
+  width: 900px;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: white;
+  filter: blur(0px);
+}

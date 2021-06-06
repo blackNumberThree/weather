@@ -1,6 +1,6 @@
 import { getGeoData, sendRequestToAPI } from "./APIServise";
 import { Header } from "../src/components/Header";
-import { SirchPanel } from "./components/SirchPanel";
+import { CityChosePanel } from "./components/CityChosePanel";
 import { TimeNavigation } from "./components/TimeNavigation";
 import { Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -9,6 +9,7 @@ import { HourlyWeather } from "./pages/HourlyWeather";
 import { DailyWeather } from "./pages/DailyWeather";
 import { useEffect } from "react";
 import { compose } from "redux";
+import "./css/global.css";
 export function CreateApp({ coord, location }) {
   useEffect(() => {
     if (location.pathname !== "/") {
@@ -32,7 +33,7 @@ export function CreateApp({ coord, location }) {
     <>
       <Header />
       <TimeNavigation />
-      <SirchPanel />
+      <CityChosePanel />
       <Route path="/" exact component={CurrentWeather} />
       <Route path="/current" component={CurrentWeather} />
       <Route path="/hourly" component={HourlyWeather} />

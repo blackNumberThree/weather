@@ -1,15 +1,20 @@
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { dispatchChangeCityName } from "../action-creation";
+import style from "../css/cityChosePanel.module.css";
 
-function createSirchPanel({ timeMode }) {
-  function changeCity(event) {
-    dispatchChangeCityName(event.target.innerText);
+function createCityChosePanel({ timeMode }) {
+  // function changeCity(event) {
+  //   dispatchChangeCityName(event.target.innerText);
+  // }
 
-  }
   return (
-    <div className="SirchPanel">
-      <Link to={`/${timeMode}/49.96,36.32`}>
+    <div className={style.CityChosePanel}>
+      <div className={style.cityChoosenMenu}>
+        Выберете город <span className={style.buttonArrow}> </span>
+      </div>
+
+      {/* <Link to={`/${tCimeMode}/49.96,36.32`}>
         <span onClick={changeCity} className="city">
           Харьков
         </span>
@@ -33,7 +38,7 @@ function createSirchPanel({ timeMode }) {
         <span onClick={changeCity} className="city">
           Слобожанское
         </span>
-      </Link>
+      </Link> */}
     </div>
   );
 }
@@ -41,4 +46,4 @@ function createSirchPanel({ timeMode }) {
 function mapStateToProps(state) {
   return { timeMode: state.timeMode };
 }
-export let SirchPanel = connect(mapStateToProps)(createSirchPanel);
+export let CityChosePanel = connect(mapStateToProps)(createCityChosePanel);

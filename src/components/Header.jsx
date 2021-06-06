@@ -14,7 +14,6 @@ export function createHeader({ coord, city }) {
       </span>
     </span>
   );
-  // console.log(city);
   const changePart = city ? cityLabel : coordLabel;
   let today;
   let todayHourMinutes;
@@ -64,7 +63,7 @@ export function createHeader({ coord, city }) {
   getTime();
   setTimeout(getTime, 60000);
   return (
-    <div className="header">
+    <div className={style.header}>
       <h2 className={style.time}>
         <span className={style.todayHourMinutes}>{todayHourMinutes}</span>
         {today}

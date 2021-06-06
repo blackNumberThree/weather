@@ -1,0 +1,24 @@
+.CityChosePanel {
+  display: inline-block;
+  background-image: linear-gradient(to right top, #7b92e2, #9bc6ff);
+  padding: 11px;
+  border-radius: 15px;
+  margin-left: 20px;
+}
+
+.cityChoosenMenu {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 4px 15px 4px 10px;
+  background-color: white;
+  color: rgb(65, 65, 65);
+}
+
+.buttonArrow {
+  display: inline-block;
+  margin-left: 20px;
+  width: 18px;
+  height: 20px;
+  background-image: url("../img/chevron-down-solid.svg");
+  vertical-align: middle;
+}
