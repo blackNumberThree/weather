@@ -33,15 +33,11 @@ export function WeatherDisplay({ weatherMap }) {
 
   let currentIcon = setCurrentIcon(weatherMap.icon);
 
-  function writeCapitalize(str) {
-    return str.toUpperCase()[0] + str.slice(1);
-  }
-
   return (
     <div className={style.weatherBlock}>
       <div className={style.weatherBigIcons}>
         <span className={style.weatherDescription}>
-          {writeCapitalize(weatherMap.description)}
+          {weatherMap.description}
         </span>
         <img
           className={style.weatherBigImg}

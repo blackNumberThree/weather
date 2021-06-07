@@ -36,6 +36,9 @@ export function getGeoData() {
 }
 
 function convertWeatherMap({ current, daily, hourly }) {
+  function writeCapitalize(str) {
+    return str.toUpperCase()[0] + str.slice(1);
+  }
   let convertedCurrent = {
     dt: current.dt,
     icon: current.weather["0"].icon,
@@ -47,7 +50,7 @@ function convertWeatherMap({ current, daily, hourly }) {
     windSpeed: current.wind_speed,
     windGust: current.wind_gust,
     uvi: current.uvi,
-    description: current.weather["0"].description,
+    description: writeCapitalize(current.weather["0"].description),
   };
   let convertedHourly = hourly.map((element) => {
     return {
@@ -61,7 +64,7 @@ function convertWeatherMap({ current, daily, hourly }) {
       windSpeed: element.wind_speed,
       windGust: element.wind_gust,
       uvi: element.uvi,
-      description: element.weather["0"].description,
+      description: writeCapitalize(element.weather["0"].description),
     };
   });
   let convertedDaily = daily.map((element) => {
@@ -76,7 +79,7 @@ function convertWeatherMap({ current, daily, hourly }) {
       windSpeed: element.wind_speed,
       windGust: element.wind_gust,
       uvi: element.uvi,
-      description: element.weather["0"].description,
+      description: writeCapitalize(element.weather["0"].description),
     };
   });
 
