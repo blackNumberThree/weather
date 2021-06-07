@@ -1,6 +1,6 @@
-import { WeatherBarElement } from "../components/WeatherBarElementDaily";
+import { BarElementDaily } from "../components/BarElementDaily";
 import { connect } from "react-redux";
-import { WitherDisplay } from "../components/WeatherDisplay";
+import { WeatherDisplay } from "../components/WeatherDisplay";
 import { useState } from "react";
 
 export function CreateDailyWeather({ weatherMap, chosenTimeBar }) {
@@ -12,7 +12,7 @@ export function CreateDailyWeather({ weatherMap, chosenTimeBar }) {
     <>
       <div>
         {weatherMap.map((element, index) => (
-          <WeatherBarElement
+          <BarElementDaily
             key={element.dt}
             element={element}
             index={index}
@@ -20,7 +20,7 @@ export function CreateDailyWeather({ weatherMap, chosenTimeBar }) {
           />
         ))}
       </div>
-      <WitherDisplay weatherMap={weatherMap[chosenDay]} />
+      <WeatherDisplay weatherMap={weatherMap[chosenDay]} />
     </>
   );
 }

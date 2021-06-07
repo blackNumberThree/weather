@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import style from "../css/timeNavigation.module.css";
+import style from "./timeNavigation.module.css";
 
 export function CreateTimeNavigation({ coord: { latitude, longitude } }) {
   return (

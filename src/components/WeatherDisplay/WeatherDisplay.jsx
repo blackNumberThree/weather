@@ -1,7 +1,7 @@
-import { setCurrentIcon, thermometer, cloud } from "../importImg";
-import style from "../css/weatherDisplay.module.css";
+import { setCurrentIcon, thermometer, cloud } from "../../importImg";
+import style from "./weatherDisplay.module.css";
 
-export function WitherDisplay({ weatherMap }) {
+export function WeatherDisplay({ weatherMap }) {
   let miniTempLabel;
   let bigTempLabel;
   if (Array.isArray(weatherMap.temp)) {

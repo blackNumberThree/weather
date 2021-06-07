@@ -1,6 +1,6 @@
-import { setCurrentIcon } from "../importImg";
+import { setCurrentIcon } from "../../importImg";
 
-export function WeatherBarElement({
+export function BarElementDaily({
   element: { dt, icon, temp },
   index,
   setChosenDay,

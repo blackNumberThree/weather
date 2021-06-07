@@ -1,5 +1,5 @@
-import { WitherDisplay } from "../components/WeatherDisplay";
-import { WeatherBarElement } from "../components/WeatherBarElementHourly";
+import { WeatherDisplay } from "../components/WeatherDisplay";
+import { BarElementHourly } from "../components/BarElementHourly";
 import { connect } from "react-redux";
 import { useState } from "react";
 
@@ -34,7 +34,7 @@ export function CreateHourlyWeather({ weatherMap, chosenTimeBar }) {
       </div>
       <div>
         {currentWeatherDay.map((element, index) => (
-          <WeatherBarElement
+          <BarElementHourly
             key={element.dt}
             element={element}
             index={index}
@@ -42,7 +42,7 @@ export function CreateHourlyWeather({ weatherMap, chosenTimeBar }) {
           />
         ))}
       </div>
-      {<WitherDisplay weatherMap={weatherMap[chosenDay]} />}
+      {<WeatherDisplay weatherMap={weatherMap[chosenDay]} />}
     </>
   );
 }

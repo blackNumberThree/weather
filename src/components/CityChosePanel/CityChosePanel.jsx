@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { dispatchChangeCityName } from "../action-creation";
-import style from "../css/cityChosePanel.module.css";
+import { dispatchChangeCityName } from "../../action-creation";
+import style from "./cityChosePanel.module.css";
 
 function createCityChosePanel({ timeMode }) {
   // function changeCity(event) {

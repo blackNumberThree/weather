@@ -1,6 +1,6 @@
 @font-face {
   font-family: Roboto;
-  src: url("./font/Roboto-Regular.ttf");
+  src: url("../../css/font/Roboto-Regular.ttf");
 }
 .header {
   margin-top: 5%;

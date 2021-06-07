@@ -1,4 +1,4 @@
-import { WitherDisplay } from "../components/WeatherDisplay";
+import { WeatherDisplay } from "../components/WeatherDisplay";
 import { connect } from "react-redux";
 
 function createCurrentWeather({ weatherMap }) {
@@ -7,7 +7,7 @@ function createCurrentWeather({ weatherMap }) {
   }
   return (
     <>
-      <WitherDisplay weatherMap={weatherMap} />
+      <WeatherDisplay weatherMap={weatherMap} />
     </>
   );
 }
