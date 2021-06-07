@@ -1,5 +1,5 @@
-import { WeatherDisplay } from "../components/WeatherDisplay";
-import { BarElementHourly } from "../components/BarElementHourly";
+import { WeatherDisplay } from "../../components/WeatherDisplay";
+import { BarElementHourly } from "../../components/BarElementHourly";
 import { connect } from "react-redux";
 import { useState } from "react";
 

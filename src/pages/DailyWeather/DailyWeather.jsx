@@ -1,6 +1,6 @@
-import { BarElementDaily } from "../components/BarElementDaily";
+import { BarElementDaily } from "../../components/BarElementDaily";
 import { connect } from "react-redux";
-import { WeatherDisplay } from "../components/WeatherDisplay";
+import { WeatherDisplay } from "../../components/WeatherDisplay";
 import { useState } from "react";
 
 export function CreateDailyWeather({ weatherMap, chosenTimeBar }) {

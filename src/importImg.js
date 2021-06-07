@@ -62,25 +62,4 @@ export function setCurrentIcon(icon) {
   }
 }
 
-export {
-  img01d,
-  img01n,
-  img02d,
-  img02n,
-  img03d,
-  img03n,
-  img04d,
-  img04n,
-  img09d,
-  img09n,
-  img10d,
-  img10n,
-  img11d,
-  img11n,
-  img13d,
-  img13n,
-  img50d,
-  img50n,
-  thermometer,
-  cloud,
-};
+export { thermometer, cloud };
