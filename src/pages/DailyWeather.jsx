@@ -1,4 +1,4 @@
-import { WeatherBarElement } from "../components/WeatherBarElement";
+import { WeatherBarElement } from "../components/WeatherBarElementDaily";
 import { connect } from "react-redux";
 import { WitherDisplay } from "../components/WeatherDisplay";
 import { useState } from "react";
