@@ -1,7 +1,8 @@
 .CityChosePanel {
   display: inline-block;
+  position: absolute;
   background-image: linear-gradient(to right top, #7b92e2, #9bc6ff);
-  padding: 11px;
+  padding: 12px;
   border-radius: 15px;
   margin-left: 20px;
 }
@@ -21,4 +22,31 @@
   height: 20px;
   background-image: url("../../img/chevron-down-solid.svg");
   vertical-align: middle;
+}
+.cityList {
+  display: none;
+  flex-direction: column;
+}
+.cityChoosenMenu:hover .buttonArrow {
+  transform: rotate(90deg);
+}
+.cityChoosenMenu:hover .cityList {
+  display: flex;
+}
+.city {
+  font-family: Roboto;
+  font-size: 14px;
+  color: black;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  width: 100%;
+  border-bottom: 1px solid #000;
+  padding: 4px;
+}
+.city:hover {
+  color: #7b92e2;
+}
+.city:last-child {
+  border: none;
 }

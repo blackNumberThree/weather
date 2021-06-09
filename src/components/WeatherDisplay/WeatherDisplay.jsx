@@ -1,9 +1,11 @@
 import { setCurrentIcon, thermometer, cloud } from "../../importImg";
+import classNames from "classnames";
 import style from "./weatherDisplay.module.css";
 
-export function WeatherDisplay({ weatherMap }) {
+export function WeatherDisplay({ weatherMap, timeMode }) {
   let miniTempLabel;
   let bigTempLabel;
+
   if (Array.isArray(weatherMap.temp)) {
     miniTempLabel = (
       <div>
@@ -34,7 +36,13 @@ export function WeatherDisplay({ weatherMap }) {
   let currentIcon = setCurrentIcon(weatherMap.icon);
 
   return (
-    <div className={style.weatherBlock}>
+    <div
+      className={`
+      ${style.weatherBlock}
+      ${classNames({
+        [style.fullBorder]: timeMode === "current",
+      })} `}
+    >
       <div className={style.weatherBigIcons}>
         <span className={style.weatherDescription}>
           {weatherMap.description}

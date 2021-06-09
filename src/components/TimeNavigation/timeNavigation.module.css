@@ -16,23 +16,41 @@
   margin: 0 10px;
   margin-right: 20px;
 }
-.timeItem {
+
+.timeItemFirst {
+  display: inline-block;
+  padding: 6px 30px 6px 30px;
+  color: #0091d1;
+  text-decoration: underline;
+  border-right: 1px solid rgb(153, 153, 153);
+  padding-left: 40px;
+}
+.timeItemSecond {
+  display: inline-block;
+  padding: 6px 30px 6px 30px;
+  color: #0091d1;
+  text-decoration: underline;
+  border-right: 1px solid rgb(153, 153, 153);
+}
+.timeItemThird {
   display: inline-block;
   padding: 6px 30px 6px 30px;
   color: #0091d1;
   text-decoration: underline;
 }
-.timeItem:hover {
-  background-color: lightgray;
-  color: #5f5f5f;
+
+.timeItemFirst:hover,
+.timeItemSecond:hover,
+.timeItemThird:hover {
+  box-shadow: inset 0 0 15px lightgray;
   text-decoration: none;
 }
-.border {
-  border-right: 1px solid rgb(153, 153, 153);
+.timeItemActive {
+  background-color: lightgray;
+  text-decoration: none;
+  box-shadow: inset 0 0 15px lightgray;
 }
-.pl {
-  padding-left: 40px;
-}
+
 .shadowArrow {
   position: absolute;
   display: inline-block;

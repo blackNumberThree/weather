@@ -4,7 +4,7 @@ import { WeatherDisplay } from "../../components/WeatherDisplay";
 import { useState } from "react";
 import style from "./DailyWeather.module.css";
 
-export function CreateDailyWeather({ weatherMap, chosenTimeBar }) {
+export function CreateDailyWeather({ weatherMap, timeMode }) {
   let [chosenDay, setChosenDay] = useState(0);
   if (!weatherMap) {
     return <h1>Hello</h1>;
@@ -22,7 +22,7 @@ export function CreateDailyWeather({ weatherMap, chosenTimeBar }) {
           />
         ))}
       </div>
-      <WeatherDisplay weatherMap={weatherMap[chosenDay]} />
+      <WeatherDisplay weatherMap={weatherMap[chosenDay]} timeMode={timeMode} />
     </>
   );
 }
@@ -30,6 +30,7 @@ export function CreateDailyWeather({ weatherMap, chosenTimeBar }) {
 function mapStateToProps(state) {
   return {
     weatherMap: state.weatherMap.dailyWeather,
+    timeMode: state.timeMode,
   };
 }
 export let DailyWeather = connect(mapStateToProps)(CreateDailyWeather);

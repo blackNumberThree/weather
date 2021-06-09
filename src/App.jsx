@@ -1,4 +1,5 @@
 import { getGeoData, sendRequestToAPI } from "./APIServise";
+import { dispatchChangeTimeMode } from "./action-creation";
 import { Header } from "../src/components/Header";
 import { CityChosePanel } from "./components/CityChosePanel";
 import { TimeNavigation } from "./components/TimeNavigation";
@@ -17,6 +18,15 @@ export function CreateApp({ coord, location }) {
         .match(/\d\d.\d\d.\d\d.\d\d$/)[0]
         .split(",");
       sendRequestToAPI(newCoord[0], newCoord[0]);
+      if (location.pathname.indexOf("current") !== -1) {
+        dispatchChangeTimeMode("current");
+      }
+      if (location.pathname.indexOf("hourly") !== -1) {
+        dispatchChangeTimeMode("hourly");
+      }
+      if (location.pathname.indexOf("daily") !== -1) {
+        dispatchChangeTimeMode("daily");
+      }
     }
   });
   useEffect(() => {
