@@ -10,6 +10,7 @@ import { HourlyWeather } from "./pages/HourlyWeather";
 import { DailyWeather } from "./pages/DailyWeather";
 import { useEffect } from "react";
 import { compose } from "redux";
+import { Loader } from "../src/components/Loader";
 import "./css/global.css";
 export function CreateApp({ coord, location }) {
   useEffect(() => {
@@ -36,7 +37,7 @@ export function CreateApp({ coord, location }) {
   });
 
   if (!coord.latitude) {
-    return <h1>Hello</h1>;
+    return <Loader />;
   }
 
   return (

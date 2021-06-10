@@ -1,10 +1,12 @@
 import { setCurrentIcon, thermometer, cloud } from "../../importImg";
 import classNames from "classnames";
 import style from "./weatherDisplay.module.css";
+import { Loader } from "../Loader";
 
 export function WeatherDisplay({ weatherMap, timeMode }) {
   let miniTempLabel;
   let bigTempLabel;
+  let currentIcon = setCurrentIcon(weatherMap.icon);
 
   if (Array.isArray(weatherMap.temp)) {
     miniTempLabel = (
@@ -32,9 +34,9 @@ export function WeatherDisplay({ weatherMap, timeMode }) {
       <p className={style.feelsLikeTemper}>{weatherMap.feels_like} C°</p>
     );
   }
-
-  let currentIcon = setCurrentIcon(weatherMap.icon);
-
+  if (!weatherMap) {
+    return Loader;
+  }
   return (
     <div
       className={`

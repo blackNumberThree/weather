@@ -5,14 +5,16 @@
   padding: 12px;
   border-radius: 15px;
   margin-left: 20px;
+  z-index: 99;
 }
 
-.cityChoosenMenu {
+.cityMenu {
   display: inline-block;
   border-radius: 5px;
   padding: 4px 15px 4px 10px;
   background-color: white;
   color: rgb(65, 65, 65);
+  cursor: pointer;
 }
 
 .buttonArrow {
@@ -27,12 +29,18 @@
   display: none;
   flex-direction: column;
 }
+.settingDay {
+  display: inline-block;
+  min-width: 125px;
+  text-align: center;
+}
 .cityChoosenMenu:hover .buttonArrow {
   transform: rotate(90deg);
 }
-.cityChoosenMenu:hover .cityList {
+/* .cityMenu:hover .cityList {
   display: flex;
-}
+} */
+
 .city {
   font-family: Roboto;
   font-size: 14px;

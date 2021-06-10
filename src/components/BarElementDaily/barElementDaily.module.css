@@ -11,16 +11,15 @@
   margin-top: 10px;
   cursor: pointer;
 }
-.element:hover {
-  background-image: none;
-  background-color: white;
-}
 div .chosen {
   border-bottom: 1px solid white;
   background-color: white;
   background-image: none;
-  height: 162px;
   margin-top: 0;
+}
+.element:hover {
+  background-image: none;
+  background-color: white;
 }
 .element img {
   width: 65px;

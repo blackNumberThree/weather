@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { Loader } from "../Loader";
 import style from "./header.module.css";
 
 export function createHeader({ coord, city }) {
@@ -63,6 +64,9 @@ export function createHeader({ coord, city }) {
   }
   getTime();
   setTimeout(getTime, 60000);
+  if (!coord.latitude) {
+    return <Loader />;
+  }
   return (
     <div className={style.header}>
       <h2 className={style.time}>

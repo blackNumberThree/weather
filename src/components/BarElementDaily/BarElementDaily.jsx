@@ -1,6 +1,7 @@
 import { setCurrentIcon } from "../../importImg";
 import style from "./barElementDaily.module.css";
 import classNames from "classnames";
+
 export function BarElementDaily({ element, index, setChosenDay, chosenDay }) {
   let { dt, icon, temp, description } = element;
   function changeChosenElement() {

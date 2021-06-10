@@ -52,7 +52,8 @@ function convertWeatherMap({ current, daily, hourly }) {
     uvi: current.uvi,
     description: writeCapitalize(current.weather["0"].description),
   };
-  let convertedHourly = hourly.map((element) => {
+  let filterList = hourly.filter((element, index) => !(index % 2));
+  let convertedHourly = filterList.map((element) => {
     return {
       dt: element.dt,
       icon: element.weather["0"].icon,

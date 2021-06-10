@@ -1,6 +1,10 @@
-.barElementsHourly {
+.hoverWeatherBar {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
   display: flex;
-  flex-wrap: wrap;
+  background-image: linear-gradient(#0091d1 1%, rgb(92, 171, 223) 10%);
 }
 .choseDayBar {
   display: flex;

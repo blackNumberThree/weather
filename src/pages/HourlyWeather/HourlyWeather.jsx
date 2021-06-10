@@ -4,15 +4,16 @@ import { connect } from "react-redux";
 import { useState } from "react";
 import style from "./hourlyWeather.module.css";
 import classNames from "classnames";
+import { Loader } from "../../components/Loader";
 
 export function CreateHourlyWeather({ weatherMap, timeMode }) {
   let todayWeather, tomorrowWeather;
 
   if (weatherMap) {
     todayWeather = [...weatherMap];
-    todayWeather.splice(24, 24);
+    todayWeather.splice(12, 12);
     tomorrowWeather = [...weatherMap];
-    tomorrowWeather.splice(0, 24);
+    tomorrowWeather.splice(0, 12);
   }
   let [currentWeatherDay, setCurrentWeather] = useState(todayWeather);
   let [chosenDay, setChosenDay] = useState(0);
@@ -28,7 +29,7 @@ export function CreateHourlyWeather({ weatherMap, timeMode }) {
   }
 
   if (!weatherMap) {
-    return <h1>Hello</h1>;
+    return <Loader />;
   }
   return (
     <>
@@ -46,7 +47,7 @@ export function CreateHourlyWeather({ weatherMap, timeMode }) {
           Погода на завтра
         </button>
       </div>
-      <div className={style.barElementsHourly}>
+      <div className={style.hoverWeatherBar}>
         {currentWeatherDay.map((element, index) => (
           <BarElementHourly
             key={element.dt}

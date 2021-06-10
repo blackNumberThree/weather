@@ -1,9 +1,10 @@
 import { WeatherDisplay } from "../../components/WeatherDisplay";
 import { connect } from "react-redux";
+import { Loader } from "../../components/Loader";
 
 function createCurrentWeather({ weatherMap, timeMode }) {
   if (!weatherMap) {
-    return <h1>Hello</h1>;
+    return <Loader />;
   }
   return (
     <>
