@@ -13,14 +13,12 @@ function CreateCityChosePanel({ timeMode }) {
     event.target.parentElement.style.display = "none";
   }
   function showCityList(event) {
-    if (event.target.tagName === "DIV") {
-      event.target.children[2].style.display = "flex";
-    }
+    let divCityList = event.target.closest("#panelCityMenu");
+    divCityList.children[2].style.display = "flex";
   }
   function hideCityList(event) {
-    if (event.target.tagName === "DIV") {
-      event.target.children[2].style.display = "none";
-    }
+    let divCityList = event.target.closest("#panelCityMenu");
+    divCityList.children[2].style.display = "none";
   }
   return (
     <div className={style.CityChosePanel}>
@@ -28,6 +26,7 @@ function CreateCityChosePanel({ timeMode }) {
         className={style.cityMenu}
         onMouseEnter={showCityList}
         onMouseLeave={hideCityList}
+        id="panelCityMenu"
       >
         <span className={style.settingDay}>{currentCity}</span>
         <span className={style.buttonArrow}> </span>

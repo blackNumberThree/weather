@@ -39,49 +39,46 @@ function convertWeatherMap({ current, daily, hourly }) {
   function writeCapitalize(str) {
     return str.toUpperCase()[0] + str.slice(1);
   }
-  let convertedCurrent = {
-    dt: current.dt,
-    icon: current.weather["0"].icon,
-    temp: current.temp,
-    feels_like: current.feels_like,
-    clouds: current.clouds,
-    pressure: current.pressure,
-    humidity: current.humidity,
-    windSpeed: current.wind_speed,
-    windGust: current.wind_gust,
-    uvi: current.uvi,
-    description: writeCapitalize(current.weather["0"].description),
-  };
+
+  function destructuringWeatherMap({
+    dt,
+    weather,
+    temp,
+    feels_like,
+    clouds,
+    pressure,
+    humidity,
+    wind_speed,
+    uvi,
+  }) {
+    return {
+      dt,
+      icon: weather["0"].icon,
+      temp,
+      feels_like,
+      clouds,
+      pressure,
+      humidity,
+      windSpeed: wind_speed,
+      uvi,
+      description: writeCapitalize(weather["0"].description),
+    };
+  }
+
+  let convertedCurrent = destructuringWeatherMap(current);
   let filterList = hourly.filter((element, index) => !(index % 2));
   let convertedHourly = filterList.map((element) => {
-    return {
-      dt: element.dt,
-      icon: element.weather["0"].icon,
-      temp: element.temp,
-      feels_like: element.feels_like,
-      clouds: element.clouds,
-      pressure: element.pressure,
-      humidity: element.humidity,
-      windSpeed: element.wind_speed,
-      windGust: element.wind_gust,
-      uvi: element.uvi,
-      description: writeCapitalize(element.weather["0"].description),
-    };
+    return destructuringWeatherMap(element);
   });
+
   let convertedDaily = daily.map((element) => {
-    return {
-      dt: element.dt,
-      icon: element.weather["0"].icon,
-      temp: [element.temp.day, element.temp.night],
-      feels_like: [element.feels_like.day, element.feels_like.night],
-      clouds: element.clouds,
-      pressure: element.pressure,
-      humidity: element.humidity,
-      windSpeed: element.wind_speed,
-      windGust: element.wind_gust,
-      uvi: element.uvi,
-      description: writeCapitalize(element.weather["0"].description),
-    };
+    let newTemp = [element.temp.day, element.temp.night];
+    let new_feels_like = [element.feels_like.day, element.feels_like.night];
+
+    element.temp = newTemp;
+    element.feels_like = new_feels_like;
+
+    return destructuringWeatherMap(element);
   });
 
   return {
