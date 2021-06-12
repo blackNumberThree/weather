@@ -1,4 +1,4 @@
-Weather forecast app
+### Weather forecast app
   Has three types of weather viewing: for now, for two days, for a week.
 Weather forecast is made using geodata latitude and longitude.
 The site initially asks for permission to geolocate the user, then the coordinates can be swept by selecting the city.
