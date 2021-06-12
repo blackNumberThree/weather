@@ -5,7 +5,7 @@ The site initially asks for permission to geolocate the user, then the coordinat
 In the weather section for two days, you can select a day and an hourly weather forecast will appear on the panel.
 In the weekly weather section, the panel displays the daily weather
 
-###Приложение прогноза погоды 
+Приложение прогноза погоды 
  Имеет три типа просмотра погоды: на сейчас, на два дня, на неделю
 Прогноз погоды делается по геоданным широте 
 Сайт изначально запрашивает разрешение на геолокацию пользователя, затем координаты можно сметить выбрав город
