@@ -1,39 +1,35 @@
-import { setCurrentIcon, thermometer, cloud } from "../../importImg";
+import { setCurrentIcon, thermometer, cloud } from "../../service/importImg";
 import classNames from "classnames";
 import style from "./weatherDisplay.module.css";
 import { Loader } from "../Loader";
 
 export function WeatherDisplay({ weatherMap, timeMode }) {
-  let miniTempLabel;
-  let bigTempLabel;
   let currentIcon = setCurrentIcon(weatherMap.icon);
+  // daily weather mode has a different layout with hourly and current mode
 
-  if (Array.isArray(weatherMap.temp)) {
-    miniTempLabel = (
-      <div>
-        <span className={style.weatherData}>{weatherMap.temp[0]} C°</span>
-        <br />
-        <span className={style.weatherData}>{weatherMap.temp[1]} C°</span>
-      </div>
-    );
-    bigTempLabel = (
-      <div>
-        <p className={style.feelsLikeTemperRed}>
-          День {weatherMap.feels_like[0]} C°
-        </p>
-        <p className={style.feelsLikeTemperBlue}>
-          Ночь {weatherMap.feels_like[1]} C°
-        </p>
-      </div>
-    );
-  } else {
-    miniTempLabel = (
-      <span className={style.weatherData}>{weatherMap.temp} C°</span>
-    );
-    bigTempLabel = (
-      <p className={style.feelsLikeTemper}>{weatherMap.feels_like} C°</p>
-    );
-  }
+  let miniTemperatureLabel = Array.isArray(weatherMap.temp) ? (
+    <div>
+      <span className={style.weatherData}>{weatherMap.temp[0]} C°</span>
+      <br />
+      <span className={style.weatherData}>{weatherMap.temp[1]} C°</span>
+    </div>
+  ) : (
+    <span className={style.weatherData}>{weatherMap.temp} C°</span>
+  );
+
+  let bigTemperatureLabel = Array.isArray(weatherMap.temp) ? (
+    <div>
+      <p className={style.feelsLikeTemperRed}>
+        День {weatherMap.feelsLike[0]} C°
+      </p>
+      <p className={style.feelsLikeTemperBlue}>
+        Ночь {weatherMap.feelsLike[1]} C°
+      </p>
+    </div>
+  ) : (
+    <p className={style.feelsLikeTemper}>{weatherMap.feelsLike} C°</p>
+  );
+
   if (!weatherMap) {
     return Loader;
   }
@@ -55,7 +51,7 @@ export function WeatherDisplay({ weatherMap, timeMode }) {
           alt="weatherIcon"
         />
         <span>Чувствуется как</span>
-        {bigTempLabel}
+        {bigTemperatureLabel}
       </div>
       <div className={style.weatherList}>
         <figure className={style.weatherItem}>
@@ -65,7 +61,7 @@ export function WeatherDisplay({ weatherMap, timeMode }) {
             alt="thermometer"
             className={style.weatherIcon}
           />
-          {miniTempLabel}
+          {miniTemperatureLabel}
         </figure>
 
         <figure className={style.weatherItem}>

@@ -1,5 +1,6 @@
 import { dispatchAddWeather, dispatchChangeCoord } from "./action-creation";
 
+// sending a weather request to the server
 export async function sendRequestToAPI(latitude, longitude) {
   dispatchAddWeather(false);
   const urlAddress = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,allert&appid=9c1ff6247b1e536d7d7e76b09597a61b&units=metric&lang=ru`;
@@ -11,7 +12,7 @@ export async function sendRequestToAPI(latitude, longitude) {
   dispatchAddWeather(convertWeatherMap(json));
   return json;
 }
-
+// get user geodata and sending request to the server
 export function getGeoData() {
   function success(position) {
     let { latitude, longitude } = position.coords;
@@ -35,11 +36,11 @@ export function getGeoData() {
   navigator.geolocation.getCurrentPosition(success, error, option);
 }
 
+// get weather data formatting and normalize it and return
 function convertWeatherMap({ current, daily, hourly }) {
   function writeCapitalize(str) {
     return str.toUpperCase()[0] + str.slice(1);
   }
-
   function destructuringWeatherMap({
     dt,
     weather,
@@ -54,8 +55,8 @@ function convertWeatherMap({ current, daily, hourly }) {
     return {
       dt,
       icon: weather["0"].icon,
-      temp,
-      feels_like,
+      temp: temp,
+      feelsLike: feels_like,
       clouds,
       pressure,
       humidity,
@@ -72,15 +73,18 @@ function convertWeatherMap({ current, daily, hourly }) {
   });
 
   let convertedDaily = daily.map((element) => {
-    let newTemp = [element.temp.day, element.temp.night];
-    let new_feels_like = [element.feels_like.day, element.feels_like.night];
-
+    let newTemp = [
+      Math.round(element.temp.day),
+      Math.round(element.temp.night),
+    ];
+    let new_feels_like = [
+      Math.round(element.feels_like.day),
+      Math.round(element.feels_like.night),
+    ];
     element.temp = newTemp;
     element.feels_like = new_feels_like;
-
     return destructuringWeatherMap(element);
   });
-
   return {
     currentWeather: convertedCurrent,
     hourlyWeather: convertedHourly,

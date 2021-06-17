@@ -1,4 +1,4 @@
-import { setCurrentIcon } from "../../importImg";
+import { setCurrentIcon } from "../../service/importImg";
 import style from "./barElementHourly.module.css";
 import classNames from "classnames";
 
@@ -23,7 +23,7 @@ export function BarElementHourly({ element, index, setChosenDay, chosenDay }) {
         <span>{hours}:00</span>
       </div>
       <img src={setCurrentIcon(icon)} alt="icon" />
-      <span>{Math.round(temp)} C°</span>
+      <span>{temp} C°</span>
     </div>
   );
 }

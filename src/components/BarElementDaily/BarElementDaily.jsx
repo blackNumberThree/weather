@@ -1,4 +1,4 @@
-import { setCurrentIcon } from "../../importImg";
+import { setCurrentIcon } from "../../service/importImg";
 import style from "./barElementDaily.module.css";
 import classNames from "classnames";
 
@@ -21,14 +21,13 @@ export function BarElementDaily({ element, index, setChosenDay, chosenDay }) {
       <div className={style.elementRow}>
         <span className={style.elementDay}>{dayOfWeek}</span>
         <span className={style.numberOfDay}>
-          {new Date(dt * 1000).getDate() + "." + new Date(dt * 1000).getHours()}
+          {day.getDate() + "." + day.getHours()}
         </span>
       </div>
       <span className={style.description}>{description}</span>
       <img src={setCurrentIcon(icon)} alt="icon" />
       <div className={style.elementRow}>
-        <span>{Math.round(temp[0])}C°</span> -
-        <span>{Math.round(temp[1])}C°</span>
+        <span>{temp[0]}C°</span> -<span>{temp[1]}C°</span>
       </div>
     </div>
   );

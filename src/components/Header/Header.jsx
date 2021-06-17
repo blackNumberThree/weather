@@ -1,14 +1,16 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import { connect } from "react-redux";
 import { Loader } from "../Loader";
 import style from "./header.module.css";
 
-export function createHeader({ coord, city }) {
-  let cityLabel = (
+export function CreateHeader({ coord, city }) {
+  let labelWithCity = (
     <span>
       в городе: <span className="city">{city}</span>
     </span>
   );
-  let coordLabel = (
+  let LabelWithCoordinate = (
     <span>
       <span>
         по координатам ш. <span className="coordinate">{coord.latitude}</span> °
@@ -16,9 +18,8 @@ export function createHeader({ coord, city }) {
       </span>
     </span>
   );
-  const changePart = city ? cityLabel : coordLabel;
   let today;
-  let todayHourMinutes;
+  let [hourAndMinutes, setHourAndMinutes] = useState(getTime());
   function getTime() {
     let objToday = new Date();
     let weekday = [
@@ -59,21 +60,30 @@ export function createHeader({ coord, city }) {
       objToday.getMinutes() < 10
         ? "0" + objToday.getMinutes()
         : objToday.getMinutes();
-    todayHourMinutes = curHour + ":" + curMinute + " ";
+
     today = dayOfWeek + " " + dayOfMonth + "е " + curMonth + " ";
+    return curHour + ":" + curMinute + " ";
   }
-  getTime();
-  setTimeout(getTime, 60000);
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setHourAndMinutes(getTime());
+    }, 60000);
+    return () => clearTimeout(timer);
+  });
+
   if (!coord.latitude) {
     return <Loader />;
   }
+
   return (
     <div className={style.header}>
       <h2 className={style.time}>
-        <span className={style.todayHourMinutes}>{todayHourMinutes}</span>
-        {today}
+        <span className={style.hourAndMinutes}>{hourAndMinutes}</span>
+        <span>{today}</span>
       </h2>
-      <h2 className={style.coord}>Погода {changePart}</h2>
+      <h2 className={style.coord}>
+        Погода {city ? labelWithCity : LabelWithCoordinate}
+      </h2>
     </div>
   );
 }
@@ -81,4 +91,4 @@ export function createHeader({ coord, city }) {
 function mapStateToProps(state) {
   return { coord: state.coord, city: state.city };
 }
-export let Header = connect(mapStateToProps)(createHeader);
+export let Header = connect(mapStateToProps)(CreateHeader);

@@ -1,7 +1,7 @@
-import { getGeoData, sendRequestToAPI } from "./APIServise";
-import { dispatchChangeTimeMode } from "./action-creation";
+import { getGeoData, sendRequestToAPI } from "./service/APIService";
+import { dispatchChangeTimeMode } from "./service/action-creation";
 import { Header } from "../src/components/Header";
-import { CityChosePanel } from "./components/CityChosePanel";
+import { CityPanel } from "./components/CityPanel";
 import { TimeNavigation } from "./components/TimeNavigation";
 import { Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -13,6 +13,7 @@ import { compose } from "redux";
 import { Loader } from "../src/components/Loader";
 import "./css/global.css";
 export function CreateApp({ coord, location }) {
+  // get timeMod and  coordinate from URL and send request to server with this data
   useEffect(() => {
     if (location.pathname !== "/") {
       let newCoord = location.pathname
@@ -30,6 +31,7 @@ export function CreateApp({ coord, location }) {
       }
     }
   });
+  // if there is a first boot we get geodata
   useEffect(() => {
     if (!coord.latitude) {
       getGeoData();
@@ -44,7 +46,7 @@ export function CreateApp({ coord, location }) {
     <>
       <Header />
       <TimeNavigation />
-      <CityChosePanel />
+      <CityPanel />
       <Route path="/" exact component={CurrentWeather} />
       <Route path="/current" component={CurrentWeather} />
       <Route path="/hourly" component={HourlyWeather} />
