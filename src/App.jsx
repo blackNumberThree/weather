@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import { compose } from "redux";
 import { Loader } from "../src/components/Loader";
 import "./css/global.css";
-export function CreateApp({ coord, location }) {
+export function CreateApp({ coord, location, history }) {
   // get timeMod and  coordinate from URL and send request to server with this data
   useEffect(() => {
     if (location.pathname !== "/") {
@@ -34,7 +34,7 @@ export function CreateApp({ coord, location }) {
   // if there is a first boot we get geodata
   useEffect(() => {
     if (!coord.latitude) {
-      getGeoData();
+      getGeoData(history);
     }
   });
 

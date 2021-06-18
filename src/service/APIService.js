@@ -13,14 +13,13 @@ export async function sendRequestToAPI(latitude, longitude) {
   return json;
 }
 // get user geodata and sending request to the server
-export function getGeoData() {
+export function getGeoData(history) {
   function success(position) {
     let { latitude, longitude } = position.coords;
     latitude = latitude.toFixed(2);
     longitude = longitude.toFixed(2);
-    sendRequestToAPI(latitude, longitude).then(() =>
-      dispatchChangeCoord([latitude, longitude])
-    );
+    dispatchChangeCoord([latitude, longitude]);
+    history.push(`current/${latitude},${longitude}`);
   }
   function error(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
