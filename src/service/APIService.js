@@ -19,7 +19,8 @@ export function getGeoData(history) {
     latitude = latitude.toFixed(2);
     longitude = longitude.toFixed(2);
     dispatchChangeCoord([latitude, longitude]);
-    history.push(`current/${latitude},${longitude}`);
+    console.log("получили геодату");
+    history.push(`/current/${latitude},${longitude}`);
   }
   function error(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);

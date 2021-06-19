@@ -15,7 +15,8 @@ import "./css/global.css";
 export function CreateApp({ coord, location, history }) {
   // get timeMod and  coordinate from URL and send request to server with this data
   useEffect(() => {
-    if (location.pathname !== "/") {
+    if (location.pathname !== "/weather") {
+      console.log(location.pathname);
       let newCoord = location.pathname
         .match(/\d\d.\d\d.\d\d.\d\d$/)[0]
         .split(",");
@@ -31,7 +32,7 @@ export function CreateApp({ coord, location, history }) {
       }
     }
   });
-  // if there is a first boot we get geodata
+  // if there is a first boot, we push geodata in URL
   useEffect(() => {
     if (!coord.latitude) {
       getGeoData(history);
@@ -48,9 +49,9 @@ export function CreateApp({ coord, location, history }) {
       <TimeNavigation />
       <CityPanel />
       <Route path="/" exact component={CurrentWeather} />
-      <Route path="/current" component={CurrentWeather} />
-      <Route path="/hourly" component={HourlyWeather} />
-      <Route path="/daily" component={DailyWeather} />
+      <Route path="/current/" component={CurrentWeather} />
+      <Route path="/hourly/" component={HourlyWeather} />
+      <Route path="/daily/" component={DailyWeather} />
     </>
   );
 }
