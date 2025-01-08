@@ -4,6 +4,3 @@ Has three types of weather viewing: for now, for two days, for a week. Weather f
 
 In the App component, the URL string is parsed and coordinates and timeMod are received from there, if there is no data in the URL string, then we have to take geodata and it push in URL. Then, a request is made to the server, the data received from there is first formatted, and then sent to the redux storage.
 
-Приложение прогноза погоды Имеет три типа просмотра погоды: на сейчас, на два дня, на неделю Прогноз погоды делается по геоданным широте Сайт изначально запрашивает разрешение на геолокацию пользователя, затем координаты можно сметить выбрав город В разделе погода на два дня, можно выбрать день и на панели появиться почасовый прогноз погоды В разделе погода на неделю, на пональ выводиться погода посуточно
-
-# В компоненте App идет разбор URL строки и получение оттуда координат и таймМода, если данных в URL строке нет, то идет запрос геоданных и они записываются в URL. Потом с этими данными происходит запрос на сервер, полученные данные оттуда сначала форматируются, а потом отправляютс в redux хранилище.
