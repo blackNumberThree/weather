@@ -3,7 +3,8 @@ import { dispatchAddWeather, dispatchChangeCoord } from "./action-creation";
 // sending a weather request to the server
 export async function sendRequestToAPI(latitude, longitude) {
   dispatchAddWeather(false);
-  const urlAddress = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,allert&appid=9c1ff6247b1e536d7d7e76b09597a61b&units=metric&lang=ru`;
+  const urlAddress = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,allert&appid=cf2cbc79c3e35a1af4c95b37dca7a535
+&units=metric&lang=ru`;
   const response = await fetch(urlAddress);
   if (!response.ok) {
     throw new Error("We couldn't  send fetch request");
